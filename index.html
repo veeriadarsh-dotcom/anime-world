@@ -1,287 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday!</title>
-  <style>
-    :root {
-      --primary-color: #ff4081;
-      --secondary-color: #7c4dff;
-      --bg-gradient: linear-gradient(135deg, #0d0b21, #2a0845);
-      --card-bg: rgba(255, 255, 255, 0.08);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      background: var(--bg-gradient);
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* Floating background shapes */
-    .bg-circle {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: 0;
-      animation: float 8s ease-in-out infinite alternate;
-    }
-
-    .circle-1 {
-      width: 300px;
-      height: 300px;
-      background: var(--primary-color);
-      top: 10%;
-      left: 15%;
-      opacity: 0.4;
-    }
-
-    .circle-2 {
-      width: 350px;
-      height: 350px;
-      background: var(--secondary-color);
-      bottom: 10%;
-      right: 15%;
-      opacity: 0.4;
-      animation-delay: -4s;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-30px) scale(1.1); }
-    }
-
-    /* Main Container */
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 90%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    /* Glassmorphism Card */
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 24px;
-      padding: 40px 30px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    /* Envelope Cover Stage */
-    .envelope-stage {
-      cursor: pointer;
-    }
-
-    .envelope-stage:hover .gift-icon {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .gift-icon {
-      font-size: 80px;
-      margin-bottom: 20px;
-      display: inline-block;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 15px rgba(255, 64, 129, 0.5));
-    }
-
-    .reveal-btn {
-      margin-top: 25px;
-      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-      border: none;
-      color: #fff;
-      padding: 14px 32px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .reveal-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 64, 129, 0.6);
-    }
-
-    /* Secret Message Stage */
-    .message-stage {
-      display: none;
-      opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.6s ease;
-    }
-
-    .message-stage.active {
-      display: block;
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      background: linear-gradient(45deg, #ff8a80, #ea80fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #e0e0e0;
-      margin-bottom: 20px;
-    }
-
-    /* Sparkles Animation */
-    .sparkle {
-      position: absolute;
-      pointer-events: none;
-      background: radial-gradient(circle, #fff 20%, transparent 80%);
-      border-radius: 50%;
-      animation: animateSparkle 1s linear forwards;
-    }
-
-    @keyframes animateSparkle {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
-    }
-
-    /* Canvas for Confetti */
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime World</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="bg-circle circle-1"></div>
-  <div class="bg-circle circle-2"></div>
-  <canvas id="confetti"></canvas>
+    <!-- NAVBAR -->
+    <header>
+        <div class="logo">ANIME<span>WORLD</span></div>
 
-  <div class="container">
-    <!-- Initial Invitation/Gift Box -->
-    <div class="card envelope-stage" id="envelopeStage" onclick="openGift()">
-      <div class="gift-icon">🎁</div>
-      <h2>You Have a Special Message!</h2>
-      <p>Tap the gift box or button below to open your surprise.</p>
-      <button class="reveal-btn">Open Surprise</button>
-    </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#trending">Trending</a>
+            <a href="#popular">Popular</a>
+            <a href="#genres">Genres</a>
+        </nav>
 
-    <!-- Revealed Birthday Card -->
-    <div class="card message-stage" id="messageStage">
-      <h1>Happy Birthday! 🎉</h1>
-      <p>Wishing you a day filled with laughter, joy, and unforgettable moments. May this year bring you closer to all your dreams and fill your heart with happiness!</p>
-      <p>✨ Have a wonderful celebration! ✨</p>
-    </div>
-  </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search anime...">
+            <button onclick="searchAnime()">🔍</button>
+        </div>
+    </header>
 
-  <script>
-    function openGift() {
-      const envelope = document.getElementById('envelopeStage');
-      const message = document.getElementById('messageStage');
 
-      // Create click sparkle effect
-      createSparkles();
+    <!-- HERO -->
+    <section class="hero" id="home">
 
-      // Transition elements
-      envelope.style.opacity = '0';
-      envelope.style.transform = 'scale(0.8)';
-      
-      setTimeout(() => {
-        envelope.style.display = 'none';
-        message.classList.add('active');
-        launchConfetti();
-      }, 400);
-    }
+        <div class="hero-content">
+            <p class="small-title">WELCOME TO</p>
 
-    function createSparkles() {
-      for (let i = 0; i < 30; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        const size = Math.random() * 8 + 4;
-        sparkle.style.width = `${size}px`;
-        sparkle.style.height = `${size}px`;
-        
-        const x = (Math.random() - 0.5) * 300;
-        const y = (Math.random() - 0.5) * 300;
-        sparkle.style.setProperty('--x', `${x}px`);
-        sparkle.style.setProperty('--y', `${y}px`);
-        
-        sparkle.style.left = '50%';
-        sparkle.style.top = '50%';
-        
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 1000);
-      }
-    }
+            <h1>ANIME<br><span>WORLD</span></h1>
 
-    /* Confetti Particle System */
-    function launchConfetti() {
-      const canvas = document.getElementById('confetti');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+            <p>
+                Discover your next favorite anime.
+                Explore trending shows, legendary characters,
+                and unforgettable adventures.
+            </p>
 
-      const pieces = [];
-      const numberOfPieces = 150;
-      const colors = ['#ff4081', '#7c4dff', '#00e676', '#ffea00', '#ff9100', '#00b0ff'];
+            <div class="hero-buttons">
+                <button onclick="scrollToAnime()">EXPLORE ANIME</button>
+                <button class="watch-btn" onclick="showMessage()">
+                    ▶ WATCH NOW
+                </button>
+            </div>
+        </div>
 
-      for (let i = 0; i < numberOfPieces; i++) {
-        pieces.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height - canvas.height,
-          size: Math.random() * 10 + 5,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          speed: Math.random() * 5 + 2,
-          angle: Math.random() * 360,
-          rotationSpeed: Math.random() * 10 - 5
-        });
-      }
+    </section>
 
-      function update() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
-          p.y += p.speed;
-          p.angle += p.rotationSpeed;
-          if (p.y > canvas.height) {
-            p.y = -10;
-            p.x = Math.random() * canvas.width;
-          }
 
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate((p.angle * Math.PI) / 180);
-          ctx.fillStyle = p.color;
-          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-          ctx.restore();
-        });
-        requestAnimationFrame(update);
-      }
+    <!-- TRENDING -->
+    <section class="anime-section" id="trending">
 
-      update();
-    }
-  </script>
+        <div class="section-title">
+            <h2>🔥 Trending Anime</h2>
+            <span>View All →</span>
+        </div>
+
+        <div class="anime-grid" id="trendingGrid">
+
+            <div class="anime-card" data-name="Naruto">
+                <div class="anime-image">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80">
+                    <span class="rating">⭐ 9.0</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>Naruto</h3>
+                <p>Action • Adventure</p>
+            </div>
+
+
+            <div class="anime-card" data-name="Demon Slayer">
+                <div class="anime-image">
+                    <img src="https://images.unsplash.com/photo-1614583224978-f3d3c9d4e8c5?auto=format&fit=crop&w=600&q=80">
+                    <span class="rating">⭐ 9.2</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>Demon Slayer</h3>
+                <p>Action • Fantasy</p>
+            </div>
+
+
+            <div class="anime-card" data-name="One Piece">
+                <div class="anime-image">
+                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80">
+                    <span class="rating">⭐ 9.5</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>One Piece</h3>
+                <p>Adventure • Fantasy</p>
+            </div>
+
+
+            <div class="anime-card" data-name="Jujutsu Kaisen">
+                <div class="anime-image">
+                    <img src="https://images.unsplash.com/photo-1560972550-aba3456b5564?auto=format&fit=crop&w=600&q=80">
+                    <span class="rating">⭐ 9.1</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>Jujutsu Kaisen</h3>
+                <p>Action • Supernatural</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- POPULAR -->
+    <section class="anime-section" id="popular">
+
+        <div class="section-title">
+            <h2>⭐ Popular Anime</h2>
+        </div>
+
+        <div class="anime-grid">
+
+            <div class="anime-card">
+                <div class="anime-image">
+                    <div class="poster poster1">
+                        <span>ATTACK<br>ON TITAN</span>
+                    </div>
+                    <span class="rating">⭐ 9.6</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>Attack on Titan</h3>
+                <p>Action • Drama</p>
+            </div>
+
+
+            <div class="anime-card">
+                <div class="anime-image">
+                    <div class="poster poster2">
+                        <span>MY HERO<br>ACADEMIA</span>
+                    </div>
+                    <span class="rating">⭐ 8.7</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>My Hero Academia</h3>
+                <p>Action • Superhero</p>
+            </div>
+
+
+            <div class="anime-card">
+                <div class="anime-image">
+                    <div class="poster poster3">
+                        <span>DRAGON<br>BALL</span>
+                    </div>
+                    <span class="rating">⭐ 9.0</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>Dragon Ball</h3>
+                <p>Action • Martial Arts</p>
+            </div>
+
+
+            <div class="anime-card">
+                <div class="anime-image">
+                    <div class="poster poster4">
+                        <span>DEATH<br>NOTE</span>
+                    </div>
+                    <span class="rating">⭐ 9.3</span>
+                    <button class="favorite" onclick="favorite(this)">♡</button>
+                </div>
+
+                <h3>Death Note</h3>
+                <p>Thriller • Mystery</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- GENRES -->
+    <section class="genres" id="genres">
+
+        <h2>🎭 Explore Genres</h2>
+
+        <div class="genre-list">
+            <button onclick="filterGenre('Action')">Action</button>
+            <button onclick="filterGenre('Adventure')">Adventure</button>
+            <button onclick="filterGenre('Fantasy')">Fantasy</button>
+            <button onclick="filterGenre('Romance')">Romance</button>
+            <button onclick="filterGenre('Comedy')">Comedy</button>
+            <button onclick="filterGenre('Horror')">Horror</button>
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="logo">ANIME<span>WORLD</span></div>
+
+        <p>
+            Your gateway to the world of anime.
+        </p>
+
+        <p class="copyright">
+            © 2026 Anime World. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
 </body>
 </html>
